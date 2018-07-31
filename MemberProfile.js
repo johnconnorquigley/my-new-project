@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   map: {
-      height: 400,
-      marginTop: 80
+      height: 300,
+      marginTop: 0
    },
    imageMarker: {
      width: 40,
