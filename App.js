@@ -1,21 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+'use strict';
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, NavigatorIOS } from 'react-native';
 
-export default class App extends React.Component {
+import DaliMembers from './DaliMembers';
+
+export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: 'DALI Member Dashboard',
+          component: DaliMembers,
+        }}/>
     );
   }
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  description: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#656565',
+    marginTop: 100,
   },
+  container: {
+  flex: 1,
+},
 });
