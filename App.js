@@ -10,7 +10,7 @@ export default class App extends Component<{}> {
       <NavigatorIOS
         style={styles.container}
         initialRoute={{
-          title: 'DALI Member Dashboard',
+          title: 'Dali Member Dashboard',
           component: DaliMembers,
         }}/>
     );

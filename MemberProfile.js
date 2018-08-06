@@ -9,6 +9,8 @@ import {
   ActivityIndicator,
   FlatList,
   Text,
+  Linking,
+  Button
 } from 'react-native';
 
 import MapView from 'react-native-maps';
@@ -21,6 +23,7 @@ export default class MemberProfile extends Component<{}> {
     this.state = {
       name: this.props.item.name,
       uri: 'http://mappy.dali.dartmouth.edu/' + this.props.item.iconUrl,
+      url: this.props.item.url.includes('//') ? 'https:' + this.props.item.url: 'http://mappy.dali.dartmouth.edu/' + this.props.item.url,
       message: this.props.item.message,
       termsOn: this.props.item.terms_on,
       project: this.props.item.project,
@@ -55,10 +58,19 @@ export default class MemberProfile extends Component<{}> {
               />
             </Marker>
         </MapView>
-        <Text>{this.state.uri}</Text>
-        <Text>{this.state.message}</Text>
-        <Text>{this.state.termsOn.toString()}</Text>
-        <Text>{this.state.project.toString()}</Text>
+        <View style={styles.container}>
+          <Text style={styles.name}>{this.state.name}</Text>
+          <Text style={styles.description}>{this.state.message}</Text>
+
+          <Text style={styles.header}>Terms On:</Text>
+          <Text style={styles.description}>{this.state.termsOn.toString()}</Text>
+          <Text style={styles.header}>{this.state.project.length > 1 ? "Projects:" : "Project:"}</Text>
+          <Text style={styles.description}>{this.state.project.toString()}</Text>
+          <Text style={styles.header}>Personal Link:</Text>
+          <Button title={this.state.url} style={styles.link} onPress={() => Linking.openURL(this.state.url)}></Button>
+
+
+        </View>
        </View>
     );
   }
@@ -68,14 +80,20 @@ export default class MemberProfile extends Component<{}> {
 
 const styles = StyleSheet.create({
   description: {
-    marginBottom: 20,
+    margin: 10,
     fontSize: 18,
     textAlign: 'center',
     color: '#656565'
   },
+  link: {
+    margin: 10,
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#48BBEC',
+    textDecorationLine: 'underline',
+  },
   container: {
-    padding: 30,
-    marginTop: 65,
+    padding: 10,
     alignItems: 'center'
   },
   map: {
@@ -86,5 +104,15 @@ const styles = StyleSheet.create({
      width: 40,
      height: 40,
      borderRadius: 20
+   },
+   name: {
+     fontSize: 30,
+     fontWeight: 'bold',
+     color: '#48BBEC'
+   },
+   header: {
+     fontSize: 20,
+     fontWeight: 'bold',
    }
+
 });

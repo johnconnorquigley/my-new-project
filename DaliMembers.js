@@ -21,7 +21,6 @@ class ListItem extends React.PureComponent {
 
   _onPress = () => {
     this.props.navigator.push({
-      title:  this.props.item.name,
       component: MemberProfile,
       passProps: {item: this.props.item}
     })
