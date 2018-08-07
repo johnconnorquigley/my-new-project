@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   FlatList,
+  ScrollView,
   Text,
   Linking,
   Button
@@ -15,6 +16,7 @@ import {
 
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
+import Geocoder from 'react-native-geocoding';
 
 export default class MemberProfile extends Component<{}> {
   constructor(props) {
@@ -37,10 +39,24 @@ export default class MemberProfile extends Component<{}> {
 
   }
 
+  getAddress = () => {
+    console.log("BEEANSNASNSD");
+    Geocoder.init('AIzaSyAqZXuOwzTDwz-BLkLb4jrnKXB2Eyd-Pqc');
+
+    Geocoder.from(this.state.region.latitude, this.state.region.longitude)
+        .then(json => {
+        	var addressComponent = json.results[0].address_components[0];
+            console.log(addressComponent);
+        })
+        .catch(error => console.warn(error));
+  }
 
   render() {
+
+    this.getAddress();
+
     return (
-       <View>
+       <ScrollView>
          <MapView
           region={this.state.region}
           style = {styles.map}
@@ -48,7 +64,6 @@ export default class MemberProfile extends Component<{}> {
           followUserLocation = {false}
           zoomEnabled = {true}
           >
-
             <Marker
               coordinate={{latitude: this.state.region.latitude,
               longitude: this.state.region.longitude}}>
@@ -61,7 +76,8 @@ export default class MemberProfile extends Component<{}> {
         <View style={styles.container}>
           <Text style={styles.name}>{this.state.name}</Text>
           <Text style={styles.description}>{this.state.message}</Text>
-
+          <Text style={styles.header}>Location:</Text>
+          <Text style={styles.description}>Unknown</Text>
           <Text style={styles.header}>Terms On:</Text>
           <Text style={styles.description}>{this.state.termsOn.toString()}</Text>
           <Text style={styles.header}>{this.state.project.length > 1 ? "Projects:" : "Project:"}</Text>
@@ -71,13 +87,11 @@ export default class MemberProfile extends Component<{}> {
 
 
         </View>
-       </View>
+      </ScrollView>
     );
   }
 
 }
-
-
 const styles = StyleSheet.create({
   description: {
     margin: 10,
@@ -114,5 +128,4 @@ const styles = StyleSheet.create({
      fontSize: 20,
      fontWeight: 'bold',
    }
-
 });
