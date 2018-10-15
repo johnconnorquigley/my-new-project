@@ -76,7 +76,6 @@ export default class MemberProfile extends Component<{}> {
         <View style={styles.container}>
           <Text style={styles.name}>{this.state.name}</Text>
           <Text style={styles.description}>{this.state.message}</Text>
-          <Text style={styles.header}>Location:</Text>
           <Text style={styles.description}>Unknown</Text>
           <Text style={styles.header}>Terms On:</Text>
           <Text style={styles.description}>{this.state.termsOn.toString()}</Text>
