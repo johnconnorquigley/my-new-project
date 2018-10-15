@@ -76,15 +76,12 @@ export default class MemberProfile extends Component<{}> {
         <View style={styles.container}>
           <Text style={styles.name}>{this.state.name}</Text>
           <Text style={styles.description}>{this.state.message}</Text>
-          <Text style={styles.description}>Unknown</Text>
           <Text style={styles.header}>Terms On:</Text>
           <Text style={styles.description}>{this.state.termsOn.toString()}</Text>
           <Text style={styles.header}>{this.state.project.length > 1 ? "Projects:" : "Project:"}</Text>
           <Text style={styles.description}>{this.state.project.toString()}</Text>
           <Text style={styles.header}>Personal Link:</Text>
           <Button title={this.state.url} style={styles.link} onPress={() => Linking.openURL(this.state.url)}></Button>
-
-
         </View>
       </ScrollView>
     );
